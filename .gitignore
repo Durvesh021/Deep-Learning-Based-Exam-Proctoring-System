@@ -6,3 +6,4 @@ yolov3u.pt
 yolov8n.pt
 runs/
 flask_session/
+emailConfig.json
