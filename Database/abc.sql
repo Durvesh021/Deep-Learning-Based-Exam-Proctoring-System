@@ -24,27 +24,22 @@ SET time_zone = "+00:00";
 -- Table structure for table `proctoring_log`
 --
 -- ********kaam ka*********
--- CREATE TABLE `proctoring_log` (
---   `pid` bigint(20) NOT NULL,
---   `email` varchar(100) NOT NULL,
---   `name` varchar(100) NOT NULL,
---   `test_id` varchar(100) NOT NULL,
---   `voice_db` int DEFAULT '0',
---   `img_log` longtext NOT NULL,
---   `user_movements_updown` tinyint NOT NULL,
+CREATE TABLE `proctoring_log` (
+  `pid` bigint(20) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `test_id` varchar(100) NOT NULL,
+  -- `voice_db` int DEFAULT '0',
+  `img_log` longtext NOT NULL,
+ --  `user_movements_updown` tinyint NOT NULL,
 --   `user_movements_lr` tinyint NOT NULL,
 --   `user_movements_eyes` tinyint NOT NULL,
---   `phone_detection` tinyint NOT NULL,
---   `person_status` tinyint NOT NULL,
---   `log_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
---   `uid` bigint NOT NULL
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-
+  `phone_detection` tinyint NOT NULL,
+  `person_status` tinyint NOT NULL,
+  `log_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `uid` bigint NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `questions`
 --
@@ -79,9 +74,6 @@ CREATE TABLE `students` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
--- INSERT INTO `students` (`sid`, `email`, `test_id`, `qid`, `ans`, `uid`)
--- VALUES (2, 'abc@abc.com', 'test123', 'question123', 'Answer to the question', 123456);
-
 --
 -- Table structure for table `studenttestinfo`
 --
@@ -96,11 +88,6 @@ CREATE TABLE `studenttestinfo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
--- INSERT INTO `studenttestinfo` (`stiid`, `email`, `test_id`, `time_left`, `completed`, `uid`)
--- VALUES (3, 'abc@abc.com', 'test123', '00:30:00', 1, 123456);
--- INSERT INTO `studenttestinfo` (`stiid`, `email`, `test_id`, `time_left`, `completed`, `uid`)
--- VALUES (2, 'example1@example.com', 'test1234', '00:31:00', 1, 123456);
--- select * from studenttestinfo;
 --
 -- Table structure for table `teachers`
 --
@@ -122,11 +109,10 @@ CREATE TABLE `teachers` (
   `proctoring_type` tinyint NOT NULL DEFAULT '0',
   `uid` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-INSERT INTO `teachers` (`tid`, `email`, `test_id`, `test_type`, `start`, `end`, `duration`, `show_ans`, `password`, `subject`, `topic`, `neg_marks`, `calc`, `proctoring_type`, `uid`)
-VALUES (4, 'abc@abc.com', 'test123', 'objective', '2023-05-16 09:00:00', '2023-05-16 10:30:00', 90, 1, 'password123', 'Mathematics', 'Algebra', 1, 1, 0, 123456);
+-- INSERT INTO `teachers` (`tid`, `email`, `test_id`, `test_type`, `start`, `end`, `duration`, `show_ans`, `password`, `subject`, `topic`, `neg_marks`, `calc`, `proctoring_type`, `uid`)
+-- VALUES (4, 'abc@abc.com', 'test123', 'objective', '2023-05-16 09:00:00', '2023-05-16 10:30:00', 90, 1, 'password123', 'Mathematics', 'Algebra', 1, 1, 0, 123456);
 
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `users`
 --
@@ -138,73 +124,40 @@ CREATE TABLE `users` (
   `password` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `register_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_type` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_login` tinyint NOT NULL,
+  `user_image` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_login` tinyint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- INSERT INTO `quizapp`.`users`
--- (`uid`,
--- `name`,
--- `email`,
--- `password`,
--- `user_type`,
--- `user_image`,
--- `user_login`)
--- VALUES
--- (0123,'Vasu','a@a.com','pass','student','adasdkjdhadkhksdhkjadhkjadhk',2);
-
--- SELECT `questions`.`questions_uid`,
---     `questions`.`test_id`,
---     `questions`.`qid`,
---     `questions`.`q`,
---     `questions`.`a`,
---     `questions`.`b`,
---     `questions`.`c`,
---     `questions`.`d`,
---     `questions`.`ans`,
---     `questions`.`marks`,
---     `questions`.`uid`
--- FROM `quizapp`.`questions`;
-
--- SELECT * FROM studenttestinfo;
-
--- INSERT INTO studenttestinfo (stiid, email, test_id, time_left, completed, uid) VALUES
--- (1, 'a@a.com', 'quixotic-kingfisher', '00:30:00', 1, 0123);
-
--- select* from teachers;
--- SELECT test_id from teachers where email = 'abc@abc.com' and uid = 123456 and proctoring_type = 0;
--- SELECT DISTINCT email,test_id from proctoring_log where test_id = 'quixotic-kingfisher';
-
--- DELETE FROM `quizapp`.`studenttestinfo` where stiid = 1;
-
--- SELECT a.test_id, b.subject, b.topic from studenttestinfo a, teachers b where a.test_id = b.test_id and a.email='a@a.com' and a.completed=1;
 -- --------------------------------------------------------
-
+-- select * from users;
+-- select * from teachers;
+-- delete from questions where questions_uid>=1 or questions_uid<=48;
+-- update users set user_login=0 where uid = 123457 or uid = 123459;
+-- delete from users where uid = 123457 or uid = 123459;
+-- truncate questions;
 --
 -- Table structure for table `window_estimation_log`
 --
-
--- CREATE TABLE `window_estimation_log` (
---   `wid` bigint NOT NULL,
---   `email` varchar(100) NOT NULL,
---   `test_id` varchar(100) NOT NULL,
---   `name` varchar(100) NOT NULL,
---   `window_event` tinyint NOT NULL,
---   `transaction_log` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
---   `uid` bigint NOT NULL
--- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- select * from questions;
+CREATE TABLE `window_estimation_log` (
+  `wid` bigint NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `test_id` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `window_event` tinyint NOT NULL,
+  `transaction_log` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `uid` bigint NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
 --
 -- Indexes for table `proctoring_log`
 --
--- ALTER TABLE `proctoring_log`
---   ADD PRIMARY KEY (`pid`),
---   ADD KEY `proctor_email_index` (`email`),
---   ADD KEY `proctor_email_test_id_index` (`email`,`test_id`),
---   ADD KEY `uid` (`uid`);
+ALTER TABLE `proctoring_log`
+  ADD PRIMARY KEY (`pid`),
+  ADD KEY `proctor_email_index` (`email`),
+  ADD KEY `proctor_email_test_id_index` (`email`,`test_id`),
+  ADD KEY `uid` (`uid`);
 
 --
 -- Indexes for table `questions`
@@ -244,9 +197,9 @@ ALTER TABLE `users`
 --
 -- Indexes for table `window_estimation_log`
 --
--- ALTER TABLE `window_estimation_log`
---   ADD PRIMARY KEY (`wid`),
---   ADD KEY `uid` (`uid`);
+ALTER TABLE `window_estimation_log`
+  ADD PRIMARY KEY (`wid`),
+  ADD KEY `uid` (`uid`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -255,8 +208,8 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for table `proctoring_log`
 --
--- ALTER TABLE `proctoring_log`
---   MODIFY `pid` bigint NOT NULL AUTO_INCREMENT;
+ALTER TABLE `proctoring_log`
+  MODIFY `pid` bigint NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `questions`
@@ -291,8 +244,8 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for table `window_estimation_log`
 --
--- ALTER TABLE `window_estimation_log`
---   MODIFY `wid` bigint NOT NULL AUTO_INCREMENT;
+ALTER TABLE `window_estimation_log`
+  MODIFY `wid` bigint NOT NULL AUTO_INCREMENT;
 
 -- --
 -- Constraints for dumped tables
@@ -300,8 +253,8 @@ ALTER TABLE `users`
 --
 -- Constraints for table `proctoring_log`
 --
--- ALTER TABLE `proctoring_log`
---   ADD CONSTRAINT `proctoring_log_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`);
+ALTER TABLE `proctoring_log`
+  ADD CONSTRAINT `proctoring_log_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`);
 
 --
 -- Constraints for table `questions`
@@ -330,13 +283,13 @@ ALTER TABLE `teachers`
 --
 -- Constraints for table `window_estimation_log`
 --
--- ALTER TABLE `window_estimation_log`
---   ADD CONSTRAINT `window_estimation_log_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`);
--- COMMIT;
+ALTER TABLE `window_estimation_log`
+  ADD CONSTRAINT `window_estimation_log_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-select distinct(students.test_id) as test_id, students.email as email, subject,topic,neg_marks from students,studenttestinfo,teachers where students.email = "abc@abc.com" and teachers.test_type = "objective" and students.test_id = "test123" and students.test_id=teachers.test_id and students.test_id=studenttestinfo.test_id and studenttestinfo.completed=1;
-select studenttestinfo.test_id as test_id from studenttestinfo,teachers where studenttestinfo.email = "abc@abc.com" and studenttestinfo.uid = "123456" and studenttestinfo.completed=1 and teachers.test_id = studenttestinfo.test_id and teachers.show_ans = 1 ;
-select @@password_history
+-- select distinct(students.test_id) as test_id, students.email as email, subject,topic,neg_marks from students,studenttestinfo,teachers where students.email = "abc@abc.com" and teachers.test_type = "objective" and students.test_id = "test123" and students.test_id=teachers.test_id and students.test_id=studenttestinfo.test_id and studenttestinfo.completed=1;
+-- select studenttestinfo.test_id as test_id from studenttestinfo,teachers where studenttestinfo.email = "abc@abc.com" and studenttestinfo.uid = "123456" and studenttestinfo.completed=1 and teachers.test_id = studenttestinfo.test_id and teachers.show_ans = 1 ;
+-- select @@password_history

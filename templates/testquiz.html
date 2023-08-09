@@ -108,23 +108,19 @@
             </div>
           <div class="form-group">
             <div class="container" id ="videocheck">
-              <div class="justify-content-center align-items-center">
+              <div class="justify-content-center align-items-center d-none">
                 <video id="video" width="320" height="320">
                   <!-- <canvas id="capture" width="370" height="320"></canvas> -->
                 </video>
               </div>
-              <div>
-                <button id="send">Send</button>
-              </div>
             </div>
           </div>
-          
         </div>
       </div>
     </div>
   </section>
 </main>
-<!-- <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script> -->
+<script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
 <script>
   var cal = "{{calc}}";
   console.log(cal)
@@ -148,7 +144,7 @@
 
   function sendImageToServer(imageData) {
     // Send the image data to the server using $.post
-    $.post('/live_snapshot', { 'image': imageData })
+    $.post('/live_snapshot', { 'image': imageData ,'testid':tid})
       .done(function(response) {
         // Handle the response from the server
         console.log('Image uploaded successfully');
@@ -171,16 +167,16 @@
     // Send the captured snapshot to the server
     sendImageToServer(snapshotDataUrl);
   }
-  // // Automatically capture snapshots every 5 seconds
-  // setInterval(() => {
-  //   captureSnapshot();
-  // }, 5000);
-  const btn = document.getElementById('send')
-  btn.addEventListener('click', function() {
-    // Code to be executed when the button is clicked
-    console.log('Button clicked!');
+  // Automatically capture snapshots every 5 seconds
+  setInterval(() => {
     captureSnapshot();
-  });
+  }, 5000);
+  // // const btn = document.getElementById('send')
+  // btn.addEventListener('click', function() {
+  //   // Code to be executed when the button is clicked
+  //   console.log('Button clicked!');
+  //   captureSnapshot();
+  // });
 
 </script>  
 <footer id="sticky-footer" class="py-4">
