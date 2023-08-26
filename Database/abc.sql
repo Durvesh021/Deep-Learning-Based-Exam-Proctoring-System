@@ -41,6 +41,9 @@ CREATE TABLE `proctoring_log` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 -- --------------------------------------------------------
 --
+
+select * from users;
+update users set user_login = 0 where uid = 1 or uid =2;
 -- Table structure for table `questions`
 --
 -- questions_uid is set as auto_increament in seperate code below afterwards 

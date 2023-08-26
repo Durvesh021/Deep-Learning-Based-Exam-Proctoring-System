@@ -1,7 +1,3 @@
-#Durvesh -- 18:42 25/06/2023
-#Manav -- 18:42 25/06/2023
-#Vasu
-
 from ultralytics import YOLO
 from flask import Flask, render_template, request, redirect, url_for, jsonify, flash,session, redirect
 from flask_mysqldb import MySQL
@@ -142,6 +138,11 @@ class UploadForm(FlaskForm):
 
 @app.route("/")
 def index():
+	if 'email' in session:
+		print(session)
+		if session['user_role']=="student":
+			return redirect(url_for('student_index'))
+		return redirect(url_for('professor_index'))
 	return render_template('index.html', messages = 'My name is proctor')
 
 def generateOTP() : 
@@ -211,7 +212,7 @@ def login():
 					error = 'Error Occurred!'
 					return render_template('login.html', error=error)	
 			else:
-				error = 'You have entered Invalid password or Already login'
+				error = 'Image not Verified or password is incorrect'
 				return render_template('login.html', error=error)
 			
 		else:
@@ -255,8 +256,9 @@ def logout():
 	cur = mysql.connection.cursor()
 	lbr = cur.execute('UPDATE users set user_login = 0 where email = %s and uid = %s',(session['email'],session['uid']))
 	mysql.connection.commit()
+	session.clear()
 	if lbr > 0:
-		session.clear()
+		# print(session['email']+" Logout")
 		return "success"
 	else:
 		return "error"
