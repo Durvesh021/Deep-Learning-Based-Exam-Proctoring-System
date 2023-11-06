@@ -19,7 +19,7 @@ import json
 import stripe
 import base64
 from flask_session import Session
-from flask_cors import CORS, cross_origin
+# from flask_cors import CORS, cross_origin
 # import camera
 from deepface import DeepFace
 from gaze_tracking.gaze_tracking import GazeTracking
@@ -68,8 +68,8 @@ sess.init_app(app)
 app.config['SESSION_COOKIE_SECURE'] = True
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 
-cors = CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
+# cors = CORS(app)
+# app.config['CORS_HEADERS'] = 'Content-Type'
 
 mysql = MySQL(app)
 
